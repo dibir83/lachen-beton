@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LACHEN BETON® — Тут тебе не там.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bone: #EDE7DD;
+  --bone-2: #E2DBCC;
+  --paper: #F5F1E8;
+  --ink: #0A0908;
+  --ink-2: #1F1C18;
+  --grey-1: #6B6760;
+  --grey-2: #9C968B;
+  --grey-3: #B8B2A7;
+  --orange: #E04A1A;
+  --orange-soft: #F3A07C;
+  --display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --body: 'Inter Tight', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--bone);
+  color: var(--ink);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Concrete grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px;
+  background: rgba(237, 231, 221, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(10, 9, 8, 0.08);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+.logo-mark {
+  width: 38px; height: 38px;
+  background: var(--ink);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-mark::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 12px 0 0 12px;
+  border-color: transparent transparent transparent var(--bone);
+}
+
+.logo-mark svg {
+  width: 22px; height: 22px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.95;
+}
+
+.logo-text span:first-child { font-size: 16px; }
+.logo-text span:last-child {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.reg {
+  font-size: 10px;
+  vertical-align: super;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 13px;
+  text-transform: lowercase;
+}
+
+.nav-links a {
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--orange); }
+
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--bone);
+  text-decoration: none;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--orange); }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  padding: 140px 32px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+  position: relative;
+}
+
+.hero-meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--grey-1);
+  margin-bottom: 24px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.hero-meta::before {
+  content: '';
+  width: 32px; height: 1px; background: var(--ink);
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(72px, 12vw, 200px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  font-variation-settings: 'opsz' 96;
+  color: var(--ink);
+  margin-bottom: 32px;
+}
+
+.hero h1 .period {
+  color: var(--orange);
+}
+
+.hero-sub {
+  font-family: var(--display);
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 500;
+  line-height: 1.3;
+  max-width: 460px;
+  color: var(--ink-2);
+  margin-bottom: 32px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 6px 12px;
+  border: 1px solid var(--ink);
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero-right {
+  position: relative;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Concrete sphere illustration */
+.concrete-object {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 30% 25%, #D9D1C2 0%, #B8AE9C 35%, #847B69 75%, #4A4438 100%);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0; right: 0;
+  max-width: 480px;
+  max-height: 480px;
+  align-self: center;
+  box-shadow:
+    inset -40px -60px 80px rgba(0,0,0,0.4),
+    inset 20px 30px 60px rgba(255,255,255,0.15),
+    40px 40px 0 -20px var(--orange),
+    60px 60px 80px rgba(0,0,0,0.15);
+  filter: contrast(1.05);
+}
+
+.concrete-object::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+.hero-marker {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--grey-1);
+  z-index: 2;
+}
+
+.hero-marker .num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 64px;
+  color: var(--ink);
+  line-height: 1;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--grey-1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scroll-cue .line {
+  width: 60px;
+  height: 1px;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-cue .line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--orange);
+  animation: slide 2s infinite;
+}
+
+@keyframes slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ============ MANIFESTO ============ */
+.manifesto {
+  padding: 120px 32px;
+  background: var(--ink);
+  color: var(--bone);
+  position: relative;
+}
+
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.manifesto-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+}
+
+.manifesto h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+
+.manifesto h2 em {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--orange-soft);
+}
+
+.manifesto-quote {
+  font-family: var(--display);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--grey-3);
+  padding-left: 24px;
+  border-left: 2px solid var(--orange);
+  max-width: 600px;
+}
+
+/* ============ STATS ============ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--bone-2);
+  border-bottom: 1px solid var(--bone-2);
+  background: var(--bone-2);
+  gap: 1px;
+}
+
+.stat {
+  background: var(--bone);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stat-num sup {
+  font-size: 0.4em;
+  color: var(--orange);
+  vertical-align: top;
+  margin-left: 4px;
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--grey-1);
+}
+
+/* ============ CATALOG ============ */
+.catalog {
+  padding: 120px 32px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 64px;
+  gap: 40px;
+}
+
+.section-header h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.section-counter {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--grey-1);
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.product-card {
+  position: relative;
+  background: var(--paper);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.product-card:hover { transform: translateY(-6px); }
+
+.product-img {
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+  background: var(--bone-2);
+}
+
+.product-img.tall { aspect-ratio: 4 / 6; }
+
+/* SPHERES — vase */
+.shape-sphere {
+  background:
+    radial-gradient(circle at 35% 30%, #C9C0AE 0%, #9A917F 50%, #5A5247 95%);
+}
+.shape-sphere::after {
+  content: '';
+  position: absolute;
+  width: 60%; height: 60%;
+  background: radial-gradient(circle, transparent 35%, var(--ink) 36%, var(--ink) 38%, transparent 39%);
+  top: 20%; left: 20%;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+/* CYLINDER — planter */
+.shape-cylinder {
+  background:
+    linear-gradient(180deg, var(--bone-2) 0%, var(--bone-2) 20%, transparent 20%),
+    linear-gradient(180deg, #B0A695 0%, #8A8071 40%, #5A5247 100%);
+  position: relative;
+}
+.shape-cylinder::before {
+  content: '';
+  position: absolute;
+  left: 20%; right: 20%;
+  top: 15%; bottom: 0;
+  background:
+    linear-gradient(180deg, #C9C0AE 0%, #9A917F 50%, #5A5247 100%);
+  border-radius: 4px 4px 0 0;
+}
+.shape-cylinder::after {
+  content: '';
+  position: absolute;
+  left: 18%; right: 18%;
+  top: 12%;
+  height: 6%;
+  background: var(--ink-2);
+  border-radius: 50%;
+}
+
+/* CUBE — block */
+.shape-cube {
+  background: var(--bone-2);
+  position: relative;
+}
+.shape-cube::before {
+  content: '';
+  position: absolute;
+  left: 25%; right: 25%;
+  top: 25%; bottom: 25%;
+  background:
+    linear-gradient(135deg, #C9C0AE 0%, #8A8071 60%, #5A5247 100%);
+  box-shadow:
+    20px 20px 0 -10px rgba(0,0,0,0.1);
+}
+
+/* SLAB — bench */
+.shape-slab {
+  background: var(--bone-2);
+  position: relative;
+}
+.shape-slab::before {
+  content: '';
+  position: absolute;
+  left: 10%; right: 10%;
+  top: 50%; height: 18%;
+  background:
+    linear-gradient(180deg, #B0A695 0%, #6A6155 100%);
+}
+.shape-slab::after {
+  content: '';
+  position: absolute;
+  left: 15%;
+  width: 8px;
+  top: 64%; bottom: 18%;
+  background: var(--ink-2);
+  box-shadow: calc(100% * 7.5) 0 var(--ink-2);
+}
+
+/* ARCH — art object */
+.shape-arch {
+  background: var(--bone-2);
+  position: relative;
+}
+.shape-arch::before {
+  content: '';
+  position: absolute;
+  left: 30%; right: 30%;
+  top: 20%; bottom: 15%;
+  background:
+    linear-gradient(135deg, #C9C0AE 0%, #6A6155 100%);
+  border-radius: 999px 999px 0 0;
+}
+
+/* TILE — pattern */
+.shape-tile {
+  background:
+    repeating-conic-gradient(from 30deg, #B0A695 0deg 60deg, #8A8071 60deg 120deg);
+  background-size: 40px 40px;
+}
+
+/* texture overlay on all shapes */
+.product-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+.product-meta {
+  padding: 20px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-sku {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--grey-1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.product-spec {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--grey-1);
+  text-transform: uppercase;
+}
+
+.product-tag {
+  position: absolute;
+  top: 16px; left: 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--ink);
+  color: var(--bone);
+  padding: 4px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  z-index: 3;
+}
+
+.product-tag.new { background: var(--orange); }
+.product-tag.sale { background: var(--orange); }
+
+/* ============ PROCESS ============ */
+.process {
+  padding: 120px 32px;
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.process-header {
+  max-width: 1400px;
+  margin: 0 auto 80px;
+}
+
+.process-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+
+.process h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.process h2 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--orange-soft);
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.process-step {
+  padding: 32px 0;
+  border-top: 1px solid var(--grey-1);
+  position: relative;
+}
+
+.process-step .num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--orange);
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.process-step h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.process-step p {
+  font-size: 14px;
+  color: var(--grey-3);
+  line-height: 1.55;
+}
+
+/* ============ CATEGORIES GRID ============ */
+.categories {
+  padding: 120px 32px;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.cat-card {
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--ink);
+  color: var(--bone);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+}
+
+.cat-card.large {
+  grid-column: span 6;
+  aspect-ratio: 1.5;
+}
+
+.cat-card.med {
+  grid-column: span 4;
+}
+
+.cat-card.tall {
+  grid-column: span 4;
+  aspect-ratio: auto;
+  height: 100%;
+}
+
+.cat-card.small {
+  grid-column: span 3;
+}
+
+.cat-card .cat-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cat-card .cat-bg.izdeliya {
+  background:
+    radial-gradient(circle at 30% 70%, #C9C0AE 0%, #5A5247 100%);
+}
+.cat-card .cat-bg.processy {
+  background:
+    linear-gradient(135deg, #2A2620 0%, #5A5247 100%);
+}
+.cat-card .cat-bg.objects {
+  background:
+    repeating-linear-gradient(45deg, #B0A695 0px, #B0A695 30px, #8A8071 30px, #8A8071 60px);
+}
+.cat-card .cat-bg.sale {
+  background: var(--orange);
+}
+
+.cat-card .cat-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+}
+
+.cat-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.cat-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.cat-card h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cat-arrow {
+  font-size: 0.7em;
+  opacity: 0.6;
+}
+
+/* ============ TESTIMONIAL ============ */
+.testimonial {
+  padding: 140px 32px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.test-mark {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 200px;
+  line-height: 0.8;
+  color: var(--orange);
+  letter-spacing: -0.05em;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.test-quote {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.25;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  letter-spacing: -0.01em;
+}
+
+.test-author {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--grey-1);
+}
+
+/* ============ CTA ============ */
+.cta {
+  padding: 100px 32px;
+  background: var(--orange);
+  color: var(--ink);
+}
+
+.cta-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+
+.cta h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(56px, 8vw, 144px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+
+.cta-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cta-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--ink);
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--ink);
+  transition: padding 0.3s;
+}
+
+.cta-link:last-child { border-bottom: 1px solid var(--ink); }
+.cta-link:hover { padding-left: 8px; }
+
+.cta-link .arrow {
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 60px 32px 32px;
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.footer-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.footer-logo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+}
+
+.footer-logo .reg {
+  font-size: 0.25em;
+  color: var(--orange);
+}
+
+.footer-col h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-col a {
+  color: var(--bone);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-col a:hover { color: var(--orange); }
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--grey-1);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--grey-2);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { height: 400px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .manifesto-grid { grid-template-columns: 1fr; gap: 24px; }
+  .cta-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .cat-card.large, .cat-card.med, .cat-card.tall, .cat-card.small {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 110px 20px 60px; }
+  .manifesto, .catalog, .process, .categories, .testimonial, .cta { padding: 80px 20px; }
+  .catalog-grid, .process-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+
+/* Entry animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards;
+}
+.fade-in.d1 { animation-delay: 0.1s; }
+.fade-in.d2 { animation-delay: 0.25s; }
+.fade-in.d3 { animation-delay: 0.4s; }
+.fade-in.d4 { animation-delay: 0.55s; }
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M6 4 L18 4 L18 20 L12 16 L6 20 Z" fill="#EDE7DD"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span>LACHEN</span>
+      <span>BETON<sup class="reg">®</sup></span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#catalog">каталог</a></li>
+    <li><a href="#process">процесс</a></li>
+    <li><a href="#objects">объекты</a></li>
+    <li><a href="#contact">контакты</a></li>
+  </ul>
+  <a href="https://wa.me/+79887728008" class="nav-cta">WhatsApp →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-meta fade-in d1">
+      <span>Махачкала</span>
+      <span>·</span>
+      <span>Бетонная мастерская</span>
+      <span>·</span>
+      <span>2024 — ∞</span>
+    </div>
+    <h1 class="fade-in d2">Тут тебе<br>не там<span class="period">.</span></h1>
+    <p class="hero-sub fade-in d3">Изделия из бетона от <em>А</em> до <em>Я</em>. От минимализма до арт-объектов. Доставка по всей России.</p>
+    <div class="hero-tags fade-in d4">
+      <span class="tag">Вазоны</span>
+      <span class="tag">Мебель</span>
+      <span class="tag">Кашпо</span>
+      <span class="tag">Декор</span>
+      <span class="tag">Скульптура</span>
+      <span class="tag">Под заказ</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-marker">
+      <span class="num">109</span>
+      изделий<br>в производстве
+    </div>
+    <div class="concrete-object"></div>
+  </div>
+  <div class="scroll-cue">
+    <span>scroll</span>
+    <span class="line"></span>
+    <span>каталог</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <span class="stat-num">109<sup>+</sup></span>
+    <span class="stat-label">изделий в каталоге</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">2.5K</span>
+    <span class="stat-label">подписчиков в нашей семье</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">85</span>
+    <span class="stat-label">регионов доставки</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">∞</span>
+    <span class="stat-label">идей в работе</span>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-grid">
+    <div>
+      <div class="manifesto-label">§ 01 / Манифест</div>
+    </div>
+    <div>
+      <h2>Бетон — это не серо.<br>Бетон — это <em>порядок,</em><br>тяжесть и характер.</h2>
+      <div class="manifesto-quote">
+        «Это я иду к своей цели и ещё не подозреваю, что через пару месяцев у меня будет большой цех и изделия, которые ещё никто не делал».
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="catalog">
+  <div class="section-header">
+    <h2>Разделы<br>каталога</h2>
+    <div class="section-counter">§ 02 / 04 разделов</div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card large">
+      <div class="cat-bg izdeliya"></div>
+      <div class="cat-content">
+        <div class="cat-num">01 / Серия</div>
+        <h3>Изделия <span class="cat-arrow">→</span></h3>
+      </div>
+    </div>
+    <div class="cat-card tall">
+      <div class="cat-bg processy"></div>
+      <div class="cat-content">
+        <div class="cat-num">02 / Документация</div>
+        <h3>Процессы <span class="cat-arrow">→</span></h3>
+      </div>
+    </div>
+    <div class="cat-card med">
+      <div class="cat-bg objects"></div>
+      <div class="cat-content">
+        <div class="cat-num">03 / Реализованные</div>
+        <h3>Объекты <span class="cat-arrow">→</span></h3>
+      </div>
+    </div>
+    <div class="cat-card med">
+      <div class="cat-bg sale"></div>
+      <div class="cat-content">
+        <div class="cat-num">04 / До конца мая</div>
+        <h3>SALE <span class="cat-arrow">→</span></h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section class="catalog">
+  <div class="section-header">
+    <h2>Изделия<br>в наличии</h2>
+    <div class="section-counter">показано 6 / 109</div>
+  </div>
+  <div class="catalog-grid">
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag new">NEW</span>
+        <div class="shape-sphere" style="position:absolute;inset:20%;border-radius:50%;"></div>
+      </div>
+      <div class="product-meta">
+        <div class="product-sku"><span>LB—001</span><span>в наличии</span></div>
+        <div class="product-name">Шар «Орбит»</div>
+        <div class="product-spec">⌀ 40 см · 22 кг · серый бетон</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="shape-cylinder"></div>
+      </div>
+      <div class="product-meta">
+        <div class="product-sku"><span>LB—014</span><span>в наличии</span></div>
+        <div class="product-name">Кашпо «Цилиндр»</div>
+        <div class="product-spec">60×40×40 · 35 кг · песчаный</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag sale">−25%</span>
+        <div class="shape-cube"></div>
+      </div>
+      <div class="product-meta">
+        <div class="product-sku"><span>LB—027</span><span>в наличии</span></div>
+        <div class="product-name">Куб «Монолит»</div>
+        <div class="product-spec">35×35×35 · 45 кг · графит</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img tall">
+        <div class="shape-slab"></div>
+      </div>
+      <div class="product-meta">
+        <div class="product-sku"><span>LB—042</span><span>под заказ</span></div>
+        <div class="product-name">Скамья «Плита»</div>
+        <div class="product-spec">160×40×42 · 110 кг · мрамор</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag">ART</span>
+        <div class="shape-arch"></div>
+      </div>
+      <div class="product-meta">
+        <div class="product-sku"><span>LB—058</span><span>1 / 1</span></div>
+        <div class="product-name">Арт-объект «Арка»</div>
+        <div class="product-spec">90×60×30 · 65 кг · ручная отделка</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="shape-tile"></div>
+      </div>
+      <div class="product-meta">
+        <div class="product-sku"><span>LB—073</span><span>от 100 шт</span></div>
+        <div class="product-name">Плитка «Сота»</div>
+        <div class="product-spec">20×20×3 · фактурная · 6 цветов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-header">
+    <div class="process-label">§ 03 / ЦЕХ — PRO КАЧЕСТВО И ПРОЦЕССЫ</div>
+    <h2>Как мы делаем<br><em>то, что никто не делал.</em></h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <span class="num">01 / БРИФ</span>
+      <h3>Слышим задачу</h3>
+      <p>Разбираем интерьер, объект, частоту использования. Подбираем форму, фактуру, цвет. Или делаем по эскизу заказчика.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">02 / ФОРМА</span>
+      <h3>Делаем матрицу</h3>
+      <p>Для каждого изделия — своя форма. Силикон, фанера, металл. От серии до уникального объекта тиражом 1 из 1.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">03 / ЦЕХ</span>
+      <h3>Заливаем бетон</h3>
+      <p>Архитектурный бетон собственного состава. Вибростол, армирование, контроль прочности. Никакой кустарщины.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">04 / ФИНИШ</span>
+      <h3>Шлифуем, везём</h3>
+      <p>Шлифовка, импрегнация, упаковка. Доставка по России транспортными компаниями. Подъём и установка — отдельно.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="test-mark">"</div>
+  <p class="test-quote">Тут тебе не там — это о том, что бетон в наших руках перестаёт быть строительным. Он становится мебелью, объектом, акцентом, который держит комнату.</p>
+  <div class="test-author">— Студия LACHEN BETON, Дагестан</div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="cta-grid">
+    <h2>Закажи<br>бетон<br>с характером.</h2>
+    <div class="cta-right">
+      <a href="https://wa.me/+79887728008" class="cta-link">
+        <span>WhatsApp · +7 988 772-80-08</span>
+        <span class="arrow">→</span>
+      </a>
+      <a href="#" class="cta-link">
+        <span>Instagram · @lachen_beton</span>
+        <span class="arrow">→</span>
+      </a>
+      <a href="#" class="cta-link">
+        <span>Threads · lachen_beton</span>
+        <span class="arrow">→</span>
+      </a>
+      <a href="#" class="cta-link">
+        <span>Telegram · @lachen_beton</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo">LACHEN<br>BETON<span class="reg">®</span></div>
+    <div class="footer-col">
+      <h4>Каталог</h4>
+      <ul>
+        <li><a href="#">Изделия</a></li>
+        <li><a href="#">Кашпо</a></li>
+        <li><a href="#">Мебель</a></li>
+        <li><a href="#">Арт-объекты</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Студия</h4>
+      <ul>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Процесс</a></li>
+        <li><a href="#">Объекты</a></li>
+        <li><a href="#">Цех</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <ul>
+        <li><a href="https://wa.me/+79887728008">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Threads</a></li>
+        <li><a href="#">Доставка</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© LACHEN BETON® 2024 — Тут тебе не там.</span>
+    <span>Махачкала · Дагестан · РФ</span>
+  </div>
+</footer>
+
+</body>
+</html>
