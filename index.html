@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LACHEN BETON — Объекты из архитектурного бетона</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F5F1E8;
+  --paper-2: #EFEAE0;
+  --surface: #FBF8F2;
+  --white: #FFFFFF;
+  --ink: #1A1715;
+  --ink-2: #3D362F;
+  --ink-3: #6B6258;
+  --ink-4: #9B9389;
+  --line: #DCD5C7;
+  --line-soft: #E8E2D4;
+  --espresso: #4A382B;
+
+  --display: 'Fraunces', 'Times New Roman', serif;
+  --body: 'Inter Tight', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* paper grain — very subtle */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 200;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.09 0 0 0 0 0.07 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+
+/* ============ TYPOGRAPHY UTILITIES ============ */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+}
+
+.roman {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+}
+
+.hairline {
+  height: 1px; background: var(--line);
+  border: none;
+}
+
+/* ============ NAV ============ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 22px 48px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 40px;
+  background: rgba(245, 241, 232, 0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  font-variation-settings: 'opsz' 144;
+}
+
+.logo-mark {
+  width: 32px; height: 32px;
+  background: var(--ink);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.logo-mark svg { width: 18px; height: 18px; }
+
+.logo span.sup {
+  font-family: var(--mono);
+  font-size: 9px;
+  vertical-align: super;
+  margin-left: 4px;
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.nav-links a { transition: color 0.3s; position: relative; }
+.nav-links a:hover { color: var(--ink-3); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+  font-size: 13px;
+}
+
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+/* ============ HERO ============ */
+.hero {
+  padding: 180px 48px 60px;
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+}
+
+.hero-meta .dot {
+  width: 4px; height: 4px;
+  background: var(--ink-3);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(56px, 9vw, 152px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  color: var(--ink);
+  max-width: 1200px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+  padding-top: 60px;
+  border-top: 1px solid var(--line);
+}
+
+.hero-bottom .col p {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 380px;
+  color: var(--ink-2);
+}
+
+.hero-bottom .col p.lead {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-variation-settings: 'opsz' 30;
+  color: var(--ink);
+}
+
+.hero-link {
+  display: inline-flex; align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 4px;
+  transition: gap 0.3s;
+}
+.hero-link:hover { gap: 16px; }
+
+/* Hero accent piece */
+.hero-piece {
+  position: absolute;
+  top: 18%;
+  right: 60px;
+  width: 380px;
+  height: 380px;
+  pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.piece-sphere {
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, #DDD4C0 0%, #BDB29C 30%, #8C8270 65%, #4F483D 100%);
+  box-shadow:
+    inset -30px -50px 70px rgba(0,0,0,0.35),
+    inset 20px 25px 40px rgba(255,255,255,0.12),
+    0 60px 60px -20px rgba(0,0,0,0.18),
+    0 30px 30px -15px rgba(0,0,0,0.1);
+  position: relative;
+  filter: contrast(1.02);
+}
+
+.piece-sphere::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.28 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+.piece-shadow {
+  position: absolute;
+  bottom: 24%;
+  width: 220px; height: 30px;
+  background: radial-gradient(ellipse, rgba(26,23,21,0.25) 0%, transparent 70%);
+  filter: blur(8px);
+}
+
+.piece-label {
+  position: absolute;
+  bottom: 8%; left: 4%;
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-4);
+}
+
+.piece-label .roman-num {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ============ MARQUEE ============ */
+.marquee {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 64px;
+  animation: scroll 38s linear infinite;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  font-variation-settings: 'opsz' 60;
+}
+
+.marquee-track span { display: inline-flex; align-items: center; gap: 64px; }
+.marquee-track .sep {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 12px;
+  color: var(--ink-4);
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============ STUDIO INTRO ============ */
+.studio {
+  padding: 140px 48px;
+  background: var(--paper);
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 100px;
+}
+
+.section-head-meta { display: flex; flex-direction: column; gap: 16px; }
+
+.section-head h2 {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(40px, 5.2vw, 88px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 40;
+  max-width: 900px;
+}
+
+.section-head h2 em {
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+
+.studio-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.studio-grid .col-narrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+  line-height: 1.8;
+}
+
+.studio-grid p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 480px;
+}
+
+.studio-grid p + p { margin-top: 1em; }
+
+.studio-grid p.lead {
+  font-family: var(--display);
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 30;
+  max-width: 520px;
+}
+
+.studio-grid p strong { font-weight: 500; color: var(--ink); }
+
+/* ============ FEATURED SERIES ============ */
+.featured {
+  padding: 140px 48px;
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 120px;
+  margin-top: 60px;
+}
+
+.feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.feature:nth-child(even) { direction: rtl; }
+.feature:nth-child(even) > * { direction: ltr; }
+
+.feature-visual {
+  aspect-ratio: 4 / 5;
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 1px 0 var(--line),
+    0 30px 60px -20px rgba(26,23,21,0.08);
+}
+
+.feature-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 60%, rgba(0,0,0,0.06) 0%, transparent 60%);
+}
+
+.feature-visual::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+/* Featured products visuals */
+.vis-sphere {
+  width: 58%; aspect-ratio: 1; border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 28%, #DDD4C0 0%, #B8AC95 35%, #8A8070 65%, #4D463B 100%);
+  box-shadow:
+    inset -25px -40px 60px rgba(0,0,0,0.32),
+    inset 18px 22px 36px rgba(255,255,255,0.12),
+    0 40px 50px -10px rgba(0,0,0,0.18);
+  filter: contrast(1.02);
+  position: relative; z-index: 1;
+}
+
+.vis-cylinder {
+  width: 38%; height: 70%;
+  background:
+    linear-gradient(180deg,
+      #1A1715 0%, #1A1715 4%,
+      #B8AC95 4%, #B8AC95 6%,
+      #DDD4C0 6%, #DDD4C0 8%,
+      #C9BEA8 9%, #8A8070 80%, #4D463B 100%);
+  box-shadow:
+    inset -20px 0 40px rgba(0,0,0,0.25),
+    inset 8px 0 20px rgba(255,255,255,0.12),
+    0 40px 50px -10px rgba(0,0,0,0.18);
+  position: relative; z-index: 1;
+  border-radius: 2px;
+}
+
+.vis-slab {
+  width: 75%; height: 30%;
+  background:
+    linear-gradient(180deg, #C9BEA8 0%, #A09684 40%, #6F6555 100%);
+  box-shadow:
+    inset 0 -8px 20px rgba(0,0,0,0.18),
+    inset 0 4px 10px rgba(255,255,255,0.08),
+    0 30px 40px -10px rgba(0,0,0,0.2);
+  position: relative; z-index: 1;
+}
+.vis-slab::before, .vis-slab::after {
+  content: '';
+  position: absolute;
+  width: 6%; height: 80%;
+  background: linear-gradient(180deg, #6F6555, #2D2820);
+  top: 100%;
+}
+.vis-slab::before { left: 12%; }
+.vis-slab::after { right: 12%; }
+
+.feature-info { padding: 20px 0; }
+
+.feature-num {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--ink-3);
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 14px;
+}
+
+.feature-num::after {
+  content: '';
+  flex: 1; max-width: 60px;
+  height: 1px;
+  background: var(--ink-3);
+}
+
+.feature h3 {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(36px, 4vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 40;
+  margin-bottom: 24px;
+}
+
+.feature h3 em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+
+.feature-desc {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-bottom: 28px;
+  max-width: 480px;
+}
+
+.feature-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 28px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.feature-spec {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feature-spec .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+
+.feature-spec .value {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 30;
+}
+
+/* ============ COLLECTION GRID ============ */
+.collection {
+  padding: 140px 48px;
+}
+
+.coll-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px 32px;
+  row-gap: 64px;
+}
+
+.coll-item { position: relative; cursor: pointer; }
+
+.coll-visual {
+  aspect-ratio: 4 / 5;
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.coll-item:hover .coll-visual { transform: translateY(-4px); }
+
+.coll-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 65%, rgba(0,0,0,0.04) 0%, transparent 65%);
+}
+
+.coll-visual::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+}
+
+/* coll shapes */
+.s-sphere-sm {
+  width: 50%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 30% 28%, #E0D6C2 0%, #B5A993 50%, #4F463A 100%);
+  box-shadow: inset -20px -30px 50px rgba(0,0,0,0.3), 0 25px 30px -8px rgba(0,0,0,0.15);
+  position: relative; z-index: 1;
+}
+
+.s-cyl-sm {
+  width: 30%; height: 60%; border-radius: 2px;
+  background: linear-gradient(180deg, #1A1715 0%, #1A1715 6%, #C9BEA8 6%, #95896F 70%, #4D463B 100%);
+  box-shadow: inset -10px 0 25px rgba(0,0,0,0.2), 0 25px 30px -8px rgba(0,0,0,0.15);
+  position: relative; z-index: 1;
+}
+
+.s-cube-sm {
+  width: 48%; aspect-ratio: 1;
+  background: linear-gradient(135deg, #C9BEA8 0%, #8A8070 60%, #4F463A 100%);
+  box-shadow: 0 25px 30px -8px rgba(0,0,0,0.15);
+  position: relative; z-index: 1;
+}
+
+.s-arch-sm {
+  width: 38%; height: 65%;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(180deg, #C9BEA8 0%, #6F6555 100%);
+  box-shadow: inset -10px 0 25px rgba(0,0,0,0.18), 0 25px 30px -8px rgba(0,0,0,0.15);
+  position: relative; z-index: 1;
+}
+
+.s-slab-sm {
+  width: 68%; height: 22%;
+  background: linear-gradient(180deg, #C9BEA8 0%, #6F6555 100%);
+  box-shadow: inset 0 -6px 16px rgba(0,0,0,0.2), 0 25px 30px -8px rgba(0,0,0,0.15);
+  position: relative; z-index: 1;
+}
+
+.s-bowl-sm {
+  width: 50%; aspect-ratio: 1;
+  border-radius: 50% 50% 8% 8%;
+  background: linear-gradient(180deg, #1A1715 0%, #1A1715 8%, #C9BEA8 8%, #8A8070 80%, #4F463A 100%);
+  box-shadow: 0 25px 30px -8px rgba(0,0,0,0.15);
+  position: relative; z-index: 1;
+}
+
+.coll-info {
+  padding: 24px 4px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: start;
+}
+
+.coll-info-left { display: flex; flex-direction: column; gap: 4px; }
+
+.coll-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--ink-3);
+}
+
+.coll-name {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  font-variation-settings: 'opsz' 60, 'SOFT' 40;
+}
+
+.coll-name em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 60, 'SOFT' 100, 'WONK' 1;
+}
+
+.coll-spec {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin-top: 4px;
+}
+
+.coll-arrow {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.coll-item:hover .coll-arrow {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink);
+}
+
+.coll-cta {
+  text-align: center;
+  margin-top: 100px;
+  padding-top: 60px;
+  border-top: 1px solid var(--line);
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 16px 32px;
+  border: 1px solid var(--ink);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.btn-ghost:hover { background: var(--ink); color: var(--paper); gap: 18px; }
+
+/* ============ CRAFT ============ */
+.craft {
+  padding: 140px 48px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.craft .section-head h2 { color: var(--paper); }
+.craft .eyebrow { color: var(--ink-4); }
+.craft .roman { color: var(--ink-4); }
+
+.craft-intro {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 80px;
+  margin-bottom: 120px;
+}
+
+.craft-intro p {
+  font-family: var(--display);
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 300;
+  font-variation-settings: 'opsz' 60;
+  max-width: 700px;
+  color: var(--paper);
+}
+
+.craft-intro p em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 60, 'SOFT' 100, 'WONK' 1;
+}
+
+.craft-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--ink-3);
+}
+
+.craft-step {
+  background: var(--ink);
+  padding: 40px 32px 48px;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+.craft-num {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 56px;
+  color: var(--ink-4);
+  margin-bottom: auto;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+
+.craft-step h4 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  font-variation-settings: 'opsz' 60;
+  margin-bottom: 12px;
+  color: var(--paper);
+}
+
+.craft-step p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-4);
+}
+
+/* ============ MATERIALS ============ */
+.materials {
+  padding: 140px 48px;
+  background: var(--paper);
+}
+
+.mat-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.mat-left h2 {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(40px, 5vw, 80px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 40;
+  margin-bottom: 28px;
+}
+
+.mat-left h2 em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+
+.mat-left p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 540px;
+}
+
+.mat-left p + p { margin-top: 1.2em; }
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin-top: 40px;
+}
+
+.swatch {
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.swatch::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 8px; left: 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--paper);
+  mix-blend-mode: difference;
+}
+
+.sw-1 { background: linear-gradient(135deg, #E5DCC8, #C9BFA9); }
+.sw-2 { background: linear-gradient(135deg, #B8AC95, #8E826C); }
+.sw-3 { background: linear-gradient(135deg, #6F6555, #4D463B); }
+.sw-4 { background: linear-gradient(135deg, #FFFFFF, #E5DCC8); }
+.sw-5 { background: linear-gradient(135deg, #4A382B, #2D2018); }
+.sw-6 { background: linear-gradient(135deg, #1A1715, #0A0908); }
+
+.swatch::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+/* ============ BESPOKE ============ */
+.bespoke {
+  padding: 160px 48px;
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+  text-align: center;
+  position: relative;
+}
+
+.bespoke-eyebrow { margin-bottom: 32px; }
+
+.bespoke h2 {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(48px, 7vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+  max-width: 1100px;
+  margin: 0 auto 40px;
+}
+
+.bespoke h2 em {
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+
+.bespoke p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 580px;
+  margin: 0 auto 48px;
+}
+
+.btn-solid {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 36px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: all 0.3s;
+}
+.btn-solid:hover { gap: 18px; background: var(--espresso); }
+
+/* ============ JOURNAL ============ */
+.journal {
+  padding: 140px 48px;
+}
+
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.j-card { display: block; }
+
+.j-visual {
+  aspect-ratio: 5 / 4;
+  background: var(--surface);
+  position: relative;
+  margin-bottom: 24px;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.j-visual::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+.j-bg-1 { background: linear-gradient(135deg, #D9CFB8 0%, #8A8070 100%); }
+.j-bg-2 { background: linear-gradient(135deg, #B8AC95 0%, #4F463A 100%); }
+.j-bg-3 { background: linear-gradient(135deg, #E5DCC8 0%, #B5A993 100%); }
+
+.j-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--ink-3);
+  margin-bottom: 10px;
+}
+
+.j-card h4 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-variation-settings: 'opsz' 60, 'SOFT' 40;
+  margin-bottom: 8px;
+  max-width: 340px;
+}
+
+.j-card h4 em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 60, 'SOFT' 100, 'WONK' 1;
+}
+
+.j-card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-3);
+  max-width: 340px;
+}
+
+/* ============ CONTACT ============ */
+.contact {
+  padding: 140px 48px 100px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 100px;
+}
+
+.contact h2 {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(48px, 6.5vw, 112px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+  margin-bottom: 48px;
+}
+
+.contact h2 em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 60px;
+  padding-top: 48px;
+  border-top: 1px solid var(--ink-3);
+}
+
+.c-block h5 {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-4);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+
+.c-block .c-value {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 60;
+  color: var(--paper);
+  line-height: 1.35;
+}
+
+.c-block .c-value a:hover { color: var(--ink-4); }
+
+.c-block .c-sub {
+  font-size: 13px;
+  color: var(--ink-4);
+  margin-top: 6px;
+}
+
+.form {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--ink-3);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-4);
+  margin-bottom: 8px;
+}
+
+.form-field {
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.form-field label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--ink-4);
+}
+
+.form-field input,
+.form-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--ink-3);
+  padding: 12px 0;
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 30;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus { border-bottom-color: var(--paper); }
+
+.form-field textarea { resize: vertical; min-height: 80px; }
+
+.form button {
+  margin-top: 12px;
+  align-self: flex-start;
+  padding: 16px 32px;
+  background: var(--paper);
+  color: var(--ink);
+  border: none;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--body);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+
+.form button:hover { gap: 16px; }
+
+/* ============ FOOTER ============ */
+footer {
+  background: var(--ink);
+  color: var(--ink-4);
+  padding: 60px 48px 32px;
+  border-top: 1px solid var(--ink-3);
+}
+
+.footer-mega {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--ink-3);
+}
+
+.footer-logo {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 56px;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--paper);
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+}
+
+.footer-logo em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+}
+
+.footer-logo .reg {
+  font-family: var(--mono);
+  font-size: 14px;
+  vertical-align: super;
+  margin-left: 4px;
+}
+
+.footer-col h6 {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--paper);
+  font-weight: 400;
+  margin-bottom: 18px;
+}
+
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+.footer-col a:hover { color: var(--paper); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .wrap, nav, .hero, .studio, .featured, .collection, .craft, .materials, .bespoke, .journal, .contact, footer { padding-left: 28px; padding-right: 28px; }
+  .hero-piece { position: relative; right: auto; top: auto; margin: 40px auto 0; }
+  .hero-top { grid-template-columns: 1fr; }
+  .hero-bottom { grid-template-columns: 1fr; gap: 32px; }
+  .section-head { grid-template-columns: 1fr; gap: 24px; }
+  .studio-grid { grid-template-columns: 1fr; gap: 32px; }
+  .feature { grid-template-columns: 1fr; gap: 40px; }
+  .feature:nth-child(even) { direction: ltr; }
+  .coll-grid { grid-template-columns: repeat(2, 1fr); }
+  .craft-steps { grid-template-columns: repeat(2, 1fr); }
+  .craft-intro { grid-template-columns: 1fr; gap: 24px; }
+  .mat-grid { grid-template-columns: 1fr; gap: 40px; }
+  .journal-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 60px; }
+  .footer-mega { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+
+@media (max-width: 640px) {
+  nav { padding: 16px 20px; grid-template-columns: 1fr auto; }
+  .nav-links { display: none; }
+  body { font-size: 14px; }
+  .hero { padding: 130px 20px 40px; }
+  .studio, .featured, .collection, .craft, .materials, .bespoke, .journal, .contact { padding: 80px 20px; }
+  .coll-grid { grid-template-columns: 1fr; }
+  .craft-steps { grid-template-columns: 1fr; }
+  .contact-info { grid-template-columns: 1fr; }
+  .footer-mega { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .form { padding: 24px; }
+}
+
+/* Entry */
+.fade-in { opacity: 0; transform: translateY(16px); animation: fadeIn 0.9s ease forwards; }
+.fade-in.d1 { animation-delay: 0.15s; }
+.fade-in.d2 { animation-delay: 0.3s; }
+.fade-in.d3 { animation-delay: 0.45s; }
+.fade-in.d4 { animation-delay: 0.6s; }
+
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M6 4 L18 4 L18 20 L12 16 L6 20 Z" fill="#F5F1E8"/>
+      </svg>
+    </div>
+    <span>lachen beton<span class="sup">®</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#collection">Коллекция</a></li>
+    <li><a href="#craft">Производство</a></li>
+    <li><a href="#materials">Материалы</a></li>
+    <li><a href="#bespoke">Индивидуально</a></li>
+    <li><a href="#journal">Журнал</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#contact" class="nav-cta">Связаться</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-meta fade-in d1">
+      <span>Volume 01</span>
+      <span class="dot"></span>
+      <span>Студия архитектурного бетона</span>
+      <span class="dot"></span>
+      <span>Махачкала · 2024</span>
+    </div>
+  </div>
+
+  <div class="fade-in d2">
+    <h1>Объекты из&nbsp;<em>архитектурного</em><br>бетона для&nbsp;современных<br>интерьеров и&nbsp;пространств.</h1>
+  </div>
+
+  <div class="hero-piece fade-in d3">
+    <div class="piece-shadow"></div>
+    <div class="piece-sphere"></div>
+    <div class="piece-label">
+      <span class="roman-num">I.</span>
+      Серия «Орбит»<br>⌀ 40 см
+    </div>
+  </div>
+
+  <div class="hero-bottom fade-in d4">
+    <div class="col">
+      <p class="lead">Мастерская, которая занимается формой бетона как материала для жилого пространства — от серийных вазонов до индивидуальной мебели и арт-объектов.</p>
+    </div>
+    <div class="col">
+      <p>Собственная разработка состава, литьё в авторские формы, ручная финишная обработка. Каждое изделие проходит контроль геометрии, прочности и поверхности перед отгрузкой.</p>
+      <a href="#collection" class="hero-link">Смотреть коллекцию →</a>
+    </div>
+    <div class="col">
+      <p>Работаем с архитекторами, дизайнерами интерьеров и частными заказчиками по всей России. Серийные изделия и проекты под индивидуальный заказ.</p>
+      <a href="#bespoke" class="hero-link">Индивидуальный заказ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Вазоны <span class="sep">·</span></span>
+    <span>Кашпо <span class="sep">·</span></span>
+    <span>Мебель из бетона <span class="sep">·</span></span>
+    <span>Скамьи <span class="sep">·</span></span>
+    <span>Столешницы <span class="sep">·</span></span>
+    <span>Арт-объекты <span class="sep">·</span></span>
+    <span>Сферы <span class="sep">·</span></span>
+    <span>Малые архитектурные формы <span class="sep">·</span></span>
+    <span>Индивидуальные проекты <span class="sep">·</span></span>
+    <span>Вазоны <span class="sep">·</span></span>
+    <span>Кашпо <span class="sep">·</span></span>
+    <span>Мебель из бетона <span class="sep">·</span></span>
+    <span>Скамьи <span class="sep">·</span></span>
+    <span>Столешницы <span class="sep">·</span></span>
+    <span>Арт-объекты <span class="sep">·</span></span>
+    <span>Сферы <span class="sep">·</span></span>
+    <span>Малые архитектурные формы <span class="sep">·</span></span>
+    <span>Индивидуальные проекты <span class="sep">·</span></span>
+  </div>
+</div>
+
+<!-- STUDIO -->
+<section class="studio">
+  <div class="section-head">
+    <div class="section-head-meta">
+      <span class="eyebrow">§ I &nbsp;—&nbsp; Студия</span>
+      <span class="roman">Lachen Beton, Махачкала</span>
+    </div>
+    <h2>Мы работаем с бетоном так,<br>как с ним работают&nbsp;<em>архитекторы:</em><br>точно, сдержанно, по делу.</h2>
+  </div>
+
+  <div class="studio-grid">
+    <div class="col-narrow">
+      Студия<br>
+      Махачкала · РФ<br><br>
+      Основана<br>2024<br><br>
+      Доставка<br>по всей России
+    </div>
+    <div>
+      <p class="lead">LACHEN BETON — независимая мастерская архитектурного бетона. Мы делаем изделия для интерьеров и общественных пространств: серии и одиночные объекты, выполненные в собственном цеху.</p>
+    </div>
+    <div>
+      <p>Наш подход основан на трёх принципах: <strong>точная геометрия</strong>, <strong>стабильное качество материала</strong> и <strong>сдержанная пластика формы</strong>. Мы не используем готовые матрицы — каждая форма разрабатывается под изделие, а состав бетона подбирается под задачу: интерьерный, экстерьерный, контактный с водой или пищевой средой.</p>
+      <p>Сотрудничаем с архитектурными бюро, студиями интерьерного дизайна, отельным сегментом и частными заказчиками. Возможна работа с предоставленной документацией или разработка от концепции.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured">
+  <div class="section-head">
+    <div class="section-head-meta">
+      <span class="eyebrow">§ II &nbsp;—&nbsp; Избранные серии</span>
+      <span class="roman">Three featured collections</span>
+    </div>
+    <h2>Три серии,<br>с которых начинается&nbsp;<em>коллекция.</em></h2>
+  </div>
+
+  <div class="featured-grid">
+    <!-- FEATURE I -->
+    <div class="feature">
+      <div class="feature-visual"><div class="vis-sphere"></div></div>
+      <div class="feature-info">
+        <div class="feature-num"><em>I.</em> &nbsp;Серия 001</div>
+        <h3>Орбит&nbsp;—<br>сфера как&nbsp;<em>центр</em><br>пространства.</h3>
+        <p class="feature-desc">Сферические объекты в трёх диаметрах. Используются как акцент в просторных интерьерах, садовых композициях и публичных зонах. Поверхность — натуральная фактура бетона с микропористой структурой.</p>
+        <div class="feature-specs">
+          <div class="feature-spec">
+            <span class="label">Диаметр</span>
+            <span class="value">30 · 40 · 60 см</span>
+          </div>
+          <div class="feature-spec">
+            <span class="label">Масса</span>
+            <span class="value">от 18 кг</span>
+          </div>
+          <div class="feature-spec">
+            <span class="label">Палитра</span>
+            <span class="value">6 оттенков</span>
+          </div>
+        </div>
+        <a href="#" class="hero-link">Подробнее о серии →</a>
+      </div>
+    </div>
+
+    <!-- FEATURE II -->
+    <div class="feature">
+      <div class="feature-visual"><div class="vis-cylinder"></div></div>
+      <div class="feature-info">
+        <div class="feature-num"><em>II.</em> &nbsp;Серия 002</div>
+        <h3>Цилиндр&nbsp;—<br>вертикаль<br>в&nbsp;<em>интерьере.</em></h3>
+        <p class="feature-desc">Цилиндрические вазоны и кашпо с дренажной системой. Подходят для крупных растений в холлах, ресторанах, домашних оранжереях. Доступны в матовой и шлифованной отделках.</p>
+        <div class="feature-specs">
+          <div class="feature-spec">
+            <span class="label">Высота</span>
+            <span class="value">от 40 до 90 см</span>
+          </div>
+          <div class="feature-spec">
+            <span class="label">Объём</span>
+            <span class="value">от 8 до 38 л</span>
+          </div>
+          <div class="feature-spec">
+            <span class="label">Финиш</span>
+            <span class="value">3 варианта</span>
+          </div>
+        </div>
+        <a href="#" class="hero-link">Подробнее о серии →</a>
+      </div>
+    </div>
+
+    <!-- FEATURE III -->
+    <div class="feature">
+      <div class="feature-visual"><div class="vis-slab"></div></div>
+      <div class="feature-info">
+        <div class="feature-num"><em>III.</em> &nbsp;Серия 003</div>
+        <h3>Плита&nbsp;—<br>скамья и&nbsp;<em>столешница</em><br>в одной форме.</h3>
+        <p class="feature-desc">Монолитные плиты на двух опорах. Служат скамьёй, столешницей или подиумом. Изготавливаются под размер заказчика. Возможна интеграция подсветки и навигационной графики.</p>
+        <div class="feature-specs">
+          <div class="feature-spec">
+            <span class="label">Длина</span>
+            <span class="value">100 — 280 см</span>
+          </div>
+          <div class="feature-spec">
+            <span class="label">Толщина</span>
+            <span class="value">40 — 60 мм</span>
+          </div>
+          <div class="feature-spec">
+            <span class="label">Срок изгот.</span>
+            <span class="value">14 — 21 день</span>
+          </div>
+        </div>
+        <a href="#" class="hero-link">Подробнее о серии →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection">
+  <div class="section-head">
+    <div class="section-head-meta">
+      <span class="eyebrow">§ III &nbsp;—&nbsp; Коллекция</span>
+      <span class="roman">Selected pieces, 2024</span>
+    </div>
+    <h2>Изделия из&nbsp;<em>текущей</em><br>коллекции.</h2>
+  </div>
+
+  <div class="coll-grid">
+    <a href="#" class="coll-item">
+      <div class="coll-visual"><div class="s-sphere-sm"></div></div>
+      <div class="coll-info">
+        <div class="coll-info-left">
+          <span class="coll-meta">LB · 001 · Орбит</span>
+          <span class="coll-name">Сфера <em>«Орбит-40»</em></span>
+          <span class="coll-spec">⌀ 40 см · 22 кг</span>
+        </div>
+        <div class="coll-arrow">→</div>
+      </div>
+    </a>
+
+    <a href="#" class="coll-item">
+      <div class="coll-visual"><div class="s-cyl-sm"></div></div>
+      <div class="coll-info">
+        <div class="coll-info-left">
+          <span class="coll-meta">LB · 014 · Цилиндр</span>
+          <span class="coll-name">Кашпо <em>«Колонна»</em></span>
+          <span class="coll-spec">⌀ 30 × H 60 · 28 л</span>
+        </div>
+        <div class="coll-arrow">→</div>
+      </div>
+    </a>
+
+    <a href="#" class="coll-item">
+      <div class="coll-visual"><div class="s-cube-sm"></div></div>
+      <div class="coll-info">
+        <div class="coll-info-left">
+          <span class="coll-meta">LB · 027 · Монолит</span>
+          <span class="coll-name">Куб <em>«Базис-35»</em></span>
+          <span class="coll-spec">35 × 35 × 35 см · 45 кг</span>
+        </div>
+        <div class="coll-arrow">→</div>
+      </div>
+    </a>
+
+    <a href="#" class="coll-item">
+      <div class="coll-visual"><div class="s-slab-sm"></div></div>
+      <div class="coll-info">
+        <div class="coll-info-left">
+          <span class="coll-meta">LB · 042 · Плита</span>
+          <span class="coll-name">Скамья <em>«Плита-160»</em></span>
+          <span class="coll-spec">160 × 40 × 42 см</span>
+        </div>
+        <div class="coll-arrow">→</div>
+      </div>
+    </a>
+
+    <a href="#" class="coll-item">
+      <div class="coll-visual"><div class="s-arch-sm"></div></div>
+      <div class="coll-info">
+        <div class="coll-info-left">
+          <span class="coll-meta">LB · 058 · Аркада</span>
+          <span class="coll-name">Объект <em>«Арка»</em></span>
+          <span class="coll-spec">90 × 60 × 30 см</span>
+        </div>
+        <div class="coll-arrow">→</div>
+      </div>
+    </a>
+
+    <a href="#" class="coll-item">
+      <div class="coll-visual"><div class="s-bowl-sm"></div></div>
+      <div class="coll-info">
+        <div class="coll-info-left">
+          <span class="coll-meta">LB · 073 · Чаша</span>
+          <span class="coll-name">Кашпо <em>«Чаша-50»</em></span>
+          <span class="coll-spec">⌀ 50 × H 25 · 14 л</span>
+        </div>
+        <div class="coll-arrow">→</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="coll-cta">
+    <a href="#" class="btn-ghost">Смотреть всю коллекцию (109) →</a>
+  </div>
+</section>
+
+<!-- CRAFT -->
+<section class="craft" id="craft">
+  <div class="section-head">
+    <div class="section-head-meta">
+      <span class="eyebrow">§ IV &nbsp;—&nbsp; Производство</span>
+      <span class="roman">Studio process</span>
+    </div>
+    <h2>Каждое изделие&nbsp;—<br>результат&nbsp;<em>четырёх</em><br>последовательных этапов.</h2>
+  </div>
+
+  <div class="craft-intro">
+    <div></div>
+    <p>Мы держим производство внутри студии. Это позволяет контролировать состав смеси, геометрию формы и качество поверхности на каждом этапе&nbsp;— от первого эскиза до отгрузки заказчику.</p>
+  </div>
+
+  <div class="craft-steps">
+    <div class="craft-step">
+      <div class="craft-num">i</div>
+      <h4>Эскиз</h4>
+      <p>Обсуждаем задачу, согласовываем габариты, фактуру и цвет. Делаем чертежи в масштабе.</p>
+    </div>
+    <div class="craft-step">
+      <div class="craft-num">ii</div>
+      <h4>Форма</h4>
+      <p>Изготавливаем матрицу из силикона, фанеры или металла под конкретное изделие.</p>
+    </div>
+    <div class="craft-step">
+      <div class="craft-num">iii</div>
+      <h4>Литьё</h4>
+      <p>Заливаем смесь, армируем, проводим вибро­уплотнение. Выдерживаем для набора прочности.</p>
+    </div>
+    <div class="craft-step">
+      <div class="craft-num">iv</div>
+      <h4>Финиш</h4>
+      <p>Шлифовка кромок, импрегнация защитным составом, контроль геометрии и упаковка.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS -->
+<section class="materials" id="materials">
+  <div class="mat-grid">
+    <div class="mat-left">
+      <span class="eyebrow" style="margin-bottom: 24px; display: block;">§ V &nbsp;—&nbsp; Материалы</span>
+      <h2>Архитектурный<br>бетон собственного&nbsp;<em>состава.</em></h2>
+      <p>Мы разработали несколько рецептур, каждая под свой класс задач: тонкостенные интерьерные изделия, объекты для улицы с морозостойкостью F200, формы для влажной среды и серий с пищевым контактом.</p>
+      <p>Армирование — стальная сетка или дисперсная фибра. Поверхность защищается водо- и&nbsp;маслоотталкивающей пропиткой, которая сохраняет фактуру бетона.</p>
+      <p>Базовая палитра — шесть оттенков. Возможен индивидуальный пигмент по образцу заказчика.</p>
+    </div>
+    <div class="mat-right">
+      <span class="eyebrow" style="display: block; margin-bottom: 20px;">Палитра</span>
+      <div class="swatches">
+        <div class="swatch sw-1" data-label="Песок"></div>
+        <div class="swatch sw-2" data-label="Олива"></div>
+        <div class="swatch sw-3" data-label="Графит"></div>
+        <div class="swatch sw-4" data-label="Мрамор"></div>
+        <div class="swatch sw-5" data-label="Терра"></div>
+        <div class="swatch sw-6" data-label="Антрацит"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BESPOKE -->
+<section class="bespoke" id="bespoke">
+  <div class="bespoke-eyebrow eyebrow">§ VI &nbsp;—&nbsp; Индивидуальный заказ</div>
+  <h2>Проект под&nbsp;<em>архитектуру,</em><br>интерьер или сценографию.</h2>
+  <p>Работаем по чертежам и трёхмерным моделям. Помогаем с инженерной проработкой, узлами крепления, логистикой и установкой. Сроки и стоимость согласуем после первичного брифинга.</p>
+  <a href="#contact" class="btn-solid">Обсудить проект →</a>
+</section>
+
+<!-- JOURNAL -->
+<section class="journal" id="journal">
+  <div class="section-head">
+    <div class="section-head-meta">
+      <span class="eyebrow">§ VII &nbsp;—&nbsp; Журнал</span>
+      <span class="roman">Recent writing</span>
+    </div>
+    <h2>Заметки о&nbsp;<em>материале</em><br>и&nbsp;о&nbsp;работе студии.</h2>
+  </div>
+
+  <div class="journal-grid">
+    <a href="#" class="j-card">
+      <div class="j-visual"><div class="j-bg-1" style="position:absolute;inset:0;"></div></div>
+      <div class="j-meta">Материалы · 8 мин чтения</div>
+      <h4>Почему мы отказались от готовых&nbsp;<em>смесей.</em></h4>
+      <p>Как и зачем студия разрабатывает собственный состав бетона под каждый тип изделий.</p>
+    </a>
+    <a href="#" class="j-card">
+      <div class="j-visual"><div class="j-bg-2" style="position:absolute;inset:0;"></div></div>
+      <div class="j-meta">Производство · 6 мин чтения</div>
+      <h4>Как устроена&nbsp;<em>матрица</em> для авторской формы.</h4>
+      <p>От первого эскиза до многоразовой силиконовой матрицы — этапы и решения студийной мастерской.</p>
+    </a>
+    <a href="#" class="j-card">
+      <div class="j-visual"><div class="j-bg-3" style="position:absolute;inset:0;"></div></div>
+      <div class="j-meta">Проекты · 5 мин чтения</div>
+      <h4>Серия «Орбит» в&nbsp;<em>интерьере</em> кафе на Каспии.</h4>
+      <p>Реализованный проект на 12 объектов — задача, ограничения и финальный результат.</p>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div>
+      <span class="eyebrow" style="color: var(--ink-4); display: block; margin-bottom: 24px;">§ VIII &nbsp;—&nbsp; Контакты</span>
+      <h2>Расскажите о&nbsp;<em>задаче.</em><br>Мы ответим в течение дня.</h2>
+
+      <div class="contact-info">
+        <div class="c-block">
+          <h5>WhatsApp</h5>
+          <div class="c-value"><a href="https://wa.me/+79887728008">+7 988 772-80-08</a></div>
+          <div class="c-sub">Ежедневно с 10:00 до 20:00</div>
+        </div>
+        <div class="c-block">
+          <h5>Электронная почта</h5>
+          <div class="c-value"><a href="mailto:studio@lachenbeton.com">studio@lachenbeton.com</a></div>
+          <div class="c-sub">Для коммерческих запросов</div>
+        </div>
+        <div class="c-block">
+          <h5>Студия</h5>
+          <div class="c-value">Махачкала<br>Республика Дагестан</div>
+          <div class="c-sub">Посещение по записи</div>
+        </div>
+        <div class="c-block">
+          <h5>Социальные сети</h5>
+          <div class="c-value"><a href="#">Instagram</a> &nbsp; <a href="#">Threads</a></div>
+          <div class="c-sub">@lachen_beton</div>
+        </div>
+      </div>
+    </div>
+
+    <form class="form" onsubmit="event.preventDefault(); alert('Спасибо. Мы свяжемся с вами.');">
+      <div class="form-eyebrow">Форма запроса</div>
+      <div class="form-field">
+        <label>Имя</label>
+        <input type="text" placeholder="Как к вам обращаться">
+      </div>
+      <div class="form-field">
+        <label>Телефон или e-mail</label>
+        <input type="text" placeholder="+7 ··· или name@studio.com">
+      </div>
+      <div class="form-field">
+        <label>Запрос</label>
+        <textarea placeholder="Опишите задачу, формат, сроки. Можно приложить ссылку на референсы."></textarea>
+      </div>
+      <button type="submit">Отправить запрос →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-mega">
+    <div>
+      <div class="footer-logo">lachen<br><em>beton</em><span class="reg">®</span></div>
+    </div>
+    <div class="footer-col">
+      <h6>Коллекция</h6>
+      <ul>
+        <li><a href="#">Сферы и шары</a></li>
+        <li><a href="#">Вазоны и кашпо</a></li>
+        <li><a href="#">Мебель</a></li>
+        <li><a href="#">Арт-объекты</a></li>
+        <li><a href="#">Малые архитектурные формы</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h6>Студия</h6>
+      <ul>
+        <li><a href="#">О мастерской</a></li>
+        <li><a href="#">Производство</a></li>
+        <li><a href="#">Материалы</a></li>
+        <li><a href="#">Индивидуальный заказ</a></li>
+        <li><a href="#">Журнал</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h6>Контакты</h6>
+      <ul>
+        <li><a href="https://wa.me/+79887728008">WhatsApp</a></li>
+        <li><a href="mailto:studio@lachenbeton.com">studio@lachenbeton.com</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Threads</a></li>
+        <li><a href="#">Доставка по РФ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© LACHEN BETON® · Студия архитектурного бетона · Махачкала</span>
+    <span>Volume 01 · 2024</span>
+  </div>
+</footer>
+
+</body>
+</html>
